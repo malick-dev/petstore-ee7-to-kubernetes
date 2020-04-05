@@ -29,4 +29,4 @@ MAINTAINER Malick D. "diop-malick@hotmail.fr"
 
 COPY --from=build \
 	/app/target/applicationPetstore.war \
-	./wildfly/standalone/deployments/ 
+	/opt/jboss/wildfly/standalone/deployments/
