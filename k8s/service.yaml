@@ -1,3 +1,5 @@
+# https://kubernetes.io/fr/docs/concepts/services-networking/service/
+# internal service accessible only in cluster 
 apiVersion: v1
 kind: Service
 metadata:
@@ -5,8 +7,8 @@ metadata:
 spec:
   selector:
     app: petstore
-  type: LoadBalancer
+  #type: ClusterIP    
   ports:
     - name: http
-      port: 8080
-      targetPort: 8080
+      port: 80
+      targetPort: 80

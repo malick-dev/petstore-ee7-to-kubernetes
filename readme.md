@@ -1,12 +1,28 @@
 # Petstore: Build with docker, Deploy to kubernetes 
 
-docker and kubernetes manifest files to transform and deploy legacy monolith petstore app with kubernetes and istio  
+docker and kubernetes manifest files to transform and deploy legacy monolith petstore app with kubernetes and istio, without changes in application code  
+
+## References
+
+based in a tutoriel of David Gageot on devoxx 2018 prez :
+
+[Docker, Kubernetes et Istio, c'est utile pour mon monolithe? (D. Gageot)](https://www.youtube.com/watch?v=Z_sNyT0hcVw)
+
+- [A Java Petstore using the Java EE 7 (by Antonio Goncalves)](https://github.com/agoncal/agoncal-application-petstore-ee7)
+
 
 ## Requirements
 
 - local kubernetes cluster
 - add local dns name `petstore.lol` in your host file. in windows `C:\Windows\System32\drivers\etc\hosts`
 
+- on windows 10 pro
+	- Enable Hyper-V
+	- Install Docker for Windows and enable Kubernetes
+	- enable ingress : install ingress controller in your local cluster 
+		- https://docs.docker.com/ee/ucp/kubernetes/cluster-ingress/ingress/
+		- https://github.com/docker/for-win/issues/1901
+		- https://stackoverflow.com/questions/59255445/how-can-i-access-nginx-ingress-on-my-local	
 ## Run in local cluster
 
 * build & tag petstore image with 
@@ -77,13 +93,6 @@ kubernetes will restart pod automaticaly
 
 `kubectl delete -f k8s/`
 
-## References
-
-based in a tutoriel of David Gageot on devoxx 2018 prez :
-
-[Docker, Kubernetes et Istio, c'est utile pour mon monolithe? (D. Gageot)](https://www.youtube.com/watch?v=Z_sNyT0hcVw)
-
-- [A Java Petstore using the Java EE 7 (by Antonio Goncalves)](https://github.com/agoncal/agoncal-application-petstore-ee7)
 
 
 ## TODO
@@ -91,8 +100,9 @@ based in a tutoriel of David Gageot on devoxx 2018 prez :
 1. [x] Dockerise application with multi-stage build
 2. [x] Deploy to kubernetes with external service
 3. [ ] Improve app with `facade pattern` or `sidecar`, add nginx http server (with gzip, 404 and nice url)
-4. [ ] Set ingress service : one domain -> One service
+	- [x] Set ingress service for local 'petstore.lol': one domain -> One service
+	- [ ] exclude external link (e.g: fontawesome) from nginx conf
+5. [ ] init isio service mesh (based on `facade` / `sidecar` pattern)
 
 - [ ] manage the statefull aspect of app
-- [ ] 
-- [ ] 
+- [ ] add github actions to build and push to docker hub

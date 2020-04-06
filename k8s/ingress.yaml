@@ -1,0 +1,18 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/
+# internal service accessible only in cluster 
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: petstore-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    #kubernetes.io/ingress.class: istio
+spec:
+  rules:
+  - host: petstore.lol
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: petstore
+          servicePort: 80
