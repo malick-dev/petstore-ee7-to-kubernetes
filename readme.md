@@ -56,6 +56,10 @@ stop container
 
 `docker push citizendiop/petstore-ee7:v1`
 
+* create custom namespace
+
+`kubectl apply -f namespaces/`
+
 * deploy resources to kubernetes cluster
 
 `kubectl apply -f k8s/`
@@ -71,9 +75,15 @@ in command line,
 
 `kubectl get po -o wide --watch`
 
-`kubectl get all`
+* to check deployed resources
 
-`kubectl get deploy,svc,pods`
+`kubectl get all --namespace=petstore-development`
+
+`kubectl get deploy,svc,pods --namespace=petstore-development`
+
+* to check namespaces
+
+`kubectl get namespaces --show-labels`
 
 * to get logs
 
@@ -85,9 +95,13 @@ in command line,
 
 kubernetes will restart pod automaticaly
 
-* delete all resources
+* delete all resources in namespace
 
 `kubectl delete -f k8s/`
+
+or 
+
+`kubectl delete -f namespaces\namespace-development.yaml`
 
 
 ## TODO
@@ -97,7 +111,9 @@ kubernetes will restart pod automaticaly
 3. [ ] Improve app with `facade pattern` or `sidecar`
 	- [x] add nginx http server (with gzip, 404 and nice url)
 	- [x] Set ingress service for local 'petstore.lol': one domain -> One service
+4. [x] Using Kubernetes Namespaces to Manage Multiple Environments (development/staging/production)
 5. [ ] init isio service mesh (based on `facade` / `sidecar` pattern)
+
 
 - [ ] manage the statefull aspect of app
 - [ ] add github actions to build and push to docker hub
