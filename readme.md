@@ -13,16 +13,19 @@ based in a tutoriel of David Gageot on devoxx 2018 prez :
 
 ## Requirements
 
-- local kubernetes cluster
+You need to have a Kubernetes cluster, and the kubectl command-line tool must be configured to communicate with your cluster. 
+
+
+e.g : for a local cluster in windows 10 pro
+
+- Enable Hyper-V
+- Install Docker for Windows and enable Kubernetes
+- enable ingress : install ingress controller in your local cluster 
+	- https://docs.docker.com/ee/ucp/kubernetes/cluster-ingress/ingress/
+	- https://github.com/docker/for-win/issues/1901
+	- https://stackoverflow.com/questions/59255445/how-can-i-access-nginx-ingress-on-my-local
 - add local dns name `petstore.lol` in your host file. in windows `C:\Windows\System32\drivers\etc\hosts`
 
-- on windows 10 pro
-	- Enable Hyper-V
-	- Install Docker for Windows and enable Kubernetes
-	- enable ingress : install ingress controller in your local cluster 
-		- https://docs.docker.com/ee/ucp/kubernetes/cluster-ingress/ingress/
-		- https://github.com/docker/for-win/issues/1901
-		- https://stackoverflow.com/questions/59255445/how-can-i-access-nginx-ingress-on-my-local	
 ## Run in local cluster
 
 * build & tag petstore image with 
@@ -108,7 +111,7 @@ or
 
 1. [x] Dockerise application with multi-stage build
 2. [x] Deploy to kubernetes with external service
-3. [ ] Improve app with `facade pattern` or `sidecar`
+3. [x] Improve app with `facade pattern` or `sidecar`
 	- [x] add nginx http server (with gzip, 404 and nice url)
 	- [x] Set ingress service for local 'petstore.lol': one domain -> One service
 4. [x] Using Kubernetes Namespaces to Manage Multiple Environments (development/staging/production)
@@ -116,4 +119,7 @@ or
 
 
 - [ ] manage the statefull aspect of app
-- [ ] add github actions to build and push to docker hub
+- [ ] add github actions to build and push image to dockerhub
+- [ ] set up with [helm](https://helm.sh/)
+- [ ] set up with [kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/)
+- [ ] with jenkins-x or github actions, automate CI/CD with multiple environments on Kubernetes cloud(GKE or AKS) using GitOps
